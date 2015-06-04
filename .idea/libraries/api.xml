@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="api">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Pobrane/dupa/jgraphx-3_3_0_0.zip!/jgraphx/docs/api" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Pobrane/dupa/jgraphx-3_3_0_0.zip!/jgraphx/examples" />
+      <root url="jar://$USER_HOME$/Pobrane/dupa/jgraphx-3_3_0_0.zip!/jgraphx/src" />
+    </SOURCES>
+  </library>
+</component>
