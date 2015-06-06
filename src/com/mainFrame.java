@@ -3,19 +3,22 @@
  */
 
 package com;
+
+import com.jgoodies.forms.factories.CC;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.jgoodies.forms.layout.FormLayout;
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxPerimeter;
-import java.awt.Color;
-import java.util.Map;
-import java.awt.*;
-import java.awt.event.*;
+
 import javax.swing.*;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map;
 
 /**
  * @author Mariusz Bielec
@@ -24,8 +27,10 @@ public class mainFrame extends JFrame {
     public mainFrame() {
         initComponents();
     }
+
     mxGraph graph;
     Object[] V;
+
     private void button2ActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(nrOfVertex.getText());
         graph = new mxGraph();
@@ -59,8 +64,8 @@ public class mainFrame extends JFrame {
             Object v7 = graph.insertVertex(parent, null, "World!", 10, 310,
                     80, 80);*/
 
-            for(int i=0; i<n; i++){
-                V[i]=graph.insertVertex(parent,null, "" + (i+1), 0,0,30,30);
+            for (int i = 0; i < n; i++) {
+                V[i] = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
             }
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
             //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
@@ -71,19 +76,19 @@ public class mainFrame extends JFrame {
             graph.insertEdge(parent, null, "Edge", v2, v6);
             graph.insertEdge(parent, null, "Edge", v6, v4);
             graph.insertEdge(parent, null, "Edge", v5, v3);*/
-           // circleLayout.execute(parent);
+            // circleLayout.execute(parent);
             circleLayout.execute(parent);
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
         } finally {
             graph.getModel().endUpdate();
         }
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
-        panel12.removeAll();
-        panel12.add(graphComponent);
-        panel12.setAutoscrolls(true);
-        panel12.setPreferredSize(graphComponent.getPreferredSize());
-        panel12.revalidate();
-        panel12.repaint();
+        graphPanel.removeAll();
+        graphPanel.add(graphComponent);
+        graphPanel.setAutoscrolls(true);
+        graphPanel.setPreferredSize(graphComponent.getPreferredSize());
+        graphPanel.revalidate();
+        graphPanel.repaint();
         pack();
         revalidate();
         repaint();
@@ -94,12 +99,12 @@ public class mainFrame extends JFrame {
         int v2 = Integer.parseInt(JtextV2.getText());
         graph.insertEdge(graph.getDefaultParent(), null, "df", V[v1 - 1], V[v2 - 1]);
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
-        panel12.removeAll();
-        panel12.add(graphComponent);
-        panel12.setAutoscrolls(true);
-        panel12.setPreferredSize(graphComponent.getPreferredSize());
-        panel12.revalidate();
-        panel12.repaint();
+        graphPanel.removeAll();
+        graphPanel.add(graphComponent);
+        graphPanel.setAutoscrolls(true);
+        graphPanel.setPreferredSize(graphComponent.getPreferredSize());
+        graphPanel.revalidate();
+        graphPanel.repaint();
         pack();
         revalidate();
         repaint();
@@ -109,98 +114,107 @@ public class mainFrame extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Mariusz Bielec
+        // Generated using JFormDesigner Evaluation license - Damian Liwak
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
-        panel7 = new JPanel();
+        optionsPanel = new JPanel();
         panel8 = new JPanel();
-        label3 = compFactory.createLabel("text");
+        numOfVertexLabel = compFactory.createLabel("text");
         nrOfVertex = new JTextField();
-        button2 = new JButton();
-        panel9 = new JPanel();
-        checkBox2 = new JCheckBox();
-        checkBox3 = new JCheckBox();
-        label4 = compFactory.createLabel("text");
+        okButton = new JButton();
+        panel1 = new JPanel();
+        deleteLab1 = new JLabel();
+        deleteLab2 = new JLabel();
+        deleteButton = new JButton();
+        edgeLabel = compFactory.createLabel("text");
         panel10 = new JPanel();
         JtextV1 = new JTextField();
         JtextV2 = new JTextField();
         button3 = new JButton();
         panel11 = new JPanel();
         label5 = compFactory.createLabel("text");
-        comboBox1 = new JComboBox();
+        selectAlgorithm = new JComboBox();
         button4 = new JButton();
-        panel12 = new JPanel();
+        graphPanel = new JPanel();
 
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(new FormLayout(
-            "4*(default, $lcgap), default",
-            "default"));
-
-        //======== panel7 ========
+                "4*(default, $lcgap), default",
+                "default"));
+        //======== optionsPanel ========
         {
 
             // JFormDesigner evaluation mark
-                      /* panel7.setBorder(new javax.swing.border.CompoundBorder(
+            optionsPanel.setBorder(new javax.swing.border.CompoundBorder(
                     new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
                             "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
                             javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                            java.awt.Color.red), panel7.getBorder())); panel7.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-*/
-            panel7.setLayout(new FormLayout(
-                "default",
-                "5*(default, $lgap), default"));
+                            java.awt.Color.red), optionsPanel.getBorder()));
+            optionsPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                public void propertyChange(java.beans.PropertyChangeEvent e) {
+                    if ("border".equals(e.getPropertyName())) throw new RuntimeException();
+                }
+            });
+
+            optionsPanel.setLayout(new FormLayout(
+                    "default",
+                    "5*(default, $lgap), default"));
 
             //======== panel8 ========
             {
                 panel8.setLayout(new FormLayout(
-                    "default",
-                    "2*(default, $lgap), default"));
+                        "default",
+                        "2*(default, $lgap), default"));
 
-                //---- label3 ----
-                label3.setText("Liczba wierzcholkow");
-                panel8.add(label3, CC.xy(1, 1));
+                //---- numOfVertexLabel ----
+                numOfVertexLabel.setText("Liczba wierzcholkow");
+                panel8.add(numOfVertexLabel, CC.xy(1, 1));
                 panel8.add(nrOfVertex, CC.xy(1, 3));
 
-                //---- button2 ----
-                button2.setText("Ok");
-                button2.setPreferredSize(new Dimension(30, 34));
-                button2.setMinimumSize(new Dimension(30, 34));
-                button2.setMaximumSize(new Dimension(30, 34));
-                button2.addActionListener(new ActionListener() {
+                //---- okButton ----
+                okButton.setText("Ok");
+                okButton.setPreferredSize(new Dimension(30, 34));
+                okButton.setMinimumSize(new Dimension(30, 34));
+                okButton.setMaximumSize(new Dimension(30, 34));
+                okButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        button2ActionPerformed(e);
+                        mainFrame.this.button2ActionPerformed(e);
                     }
                 });
-                panel8.add(button2, CC.xy(1, 5));
+                panel8.add(okButton, CC.xy(1, 5));
             }
-            panel7.add(panel8, CC.xy(1, 1));
+            optionsPanel.add(panel8, CC.xy(1, 1));
 
-            //======== panel9 ========
+            //======== panel1 ========
             {
-                panel9.setLayout(new FormLayout(
-                    "default",
-                    "default, $lgap, default"));
+                panel1.setLayout(new FormLayout(
+                        "default",
+                        "2*(default, $lgap), default"));
 
-                //---- checkBox2 ----
-                checkBox2.setText("skierowany");
-                panel9.add(checkBox2, CC.xy(1, 1));
+                //---- deleteLab1 ----
+                deleteLab1.setText("Podaj krawedz");
+                panel1.add(deleteLab1, CC.xy(1, 1));
 
-                //---- checkBox3 ----
-                checkBox3.setText("wazony");
-                panel9.add(checkBox3, CC.xy(1, 3));
+                //---- deleteLab2 ----
+                deleteLab2.setText("lub wierzcholek:");
+                panel1.add(deleteLab2, CC.xy(1, 3));
+
+                //---- deleteButton ----
+                deleteButton.setText("Usun");
+                panel1.add(deleteButton, CC.xy(1, 5));
             }
-            panel7.add(panel9, CC.xy(1, 3));
+            optionsPanel.add(panel1, CC.xy(1, 3));
 
-            //---- label4 ----
-            label4.setText("Dodaj krawedz:");
-            panel7.add(label4, CC.xy(1, 5));
+            //---- edgeLabel ----
+            edgeLabel.setText("Dodaj krawedz:");
+            optionsPanel.add(edgeLabel, CC.xy(1, 5));
 
             //======== panel10 ========
             {
                 panel10.setLayout(new FormLayout(
-                    "default, $lcgap, default",
-                    "default"));
+                        "default, $lcgap, default",
+                        "default"));
 
                 //---- JtextV1 ----
                 JtextV1.setPreferredSize(new Dimension(50, 26));
@@ -212,68 +226,69 @@ public class mainFrame extends JFrame {
                 JtextV2.setPreferredSize(new Dimension(50, 26));
                 panel10.add(JtextV2, CC.xy(3, 1));
             }
-            panel7.add(panel10, CC.xy(1, 7));
+            optionsPanel.add(panel10, CC.xy(1, 7));
 
             //---- button3 ----
             button3.setText("Dodaj");
             button3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button3ActionPerformed(e);
+                    mainFrame.this.button3ActionPerformed(e);
                 }
             });
-            panel7.add(button3, CC.xy(1, 9));
+            optionsPanel.add(button3, CC.xy(1, 9));
 
             //======== panel11 ========
             {
                 panel11.setLayout(new FormLayout(
-                    "default",
-                    "2*(default, $lgap), default"));
+                        "default",
+                        "2*(default, $lgap), default"));
 
                 //---- label5 ----
                 label5.setText("Wybierz algorytm");
                 panel11.add(label5, CC.xy(1, 1));
-                panel11.add(comboBox1, CC.xy(1, 3));
+                panel11.add(selectAlgorithm, CC.xy(1, 3));
 
                 //---- button4 ----
                 button4.setText("Start");
                 panel11.add(button4, CC.xy(1, 5));
             }
-            panel7.add(panel11, CC.xy(1, 11));
+            optionsPanel.add(panel11, CC.xy(1, 11));
         }
-        contentPane.add(panel7, CC.xy(1, 1, CC.DEFAULT, CC.TOP));
+        contentPane.add(optionsPanel, CC.xy(1, 1, CC.DEFAULT, CC.TOP));
 
-        //======== panel12 ========
+        //======== graphPanel ========
         {
-            panel12.setMinimumSize(new Dimension(300, 300));
-            panel12.setPreferredSize(new Dimension(500, 600));
-            panel12.setLayout(new BorderLayout());
+            graphPanel.setMinimumSize(new Dimension(300, 300));
+            graphPanel.setPreferredSize(new Dimension(500, 600));
+            graphPanel.setLayout(new BorderLayout());
         }
-        contentPane.add(panel12, CC.xy(3, 1));
+        contentPane.add(graphPanel, CC.xy(3, 1));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mariusz Bielec
-    private JPanel panel7;
+    // Generated using JFormDesigner Evaluation license - Damian Liwak
+    private JPanel optionsPanel;
     private JPanel panel8;
-    private JLabel label3;
+    private JLabel numOfVertexLabel;
     private JTextField nrOfVertex;
-    private JButton button2;
-    private JPanel panel9;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox3;
-    private JLabel label4;
+    private JButton okButton;
+    private JPanel panel1;
+    private JLabel deleteLab1;
+    private JLabel deleteLab2;
+    private JButton deleteButton;
+    private JLabel edgeLabel;
     private JPanel panel10;
     private JTextField JtextV1;
     private JTextField JtextV2;
     private JButton button3;
     private JPanel panel11;
     private JLabel label5;
-    private JComboBox comboBox1;
+    private JComboBox selectAlgorithm;
     private JButton button4;
-    private JPanel panel12;
+    private JPanel graphPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
