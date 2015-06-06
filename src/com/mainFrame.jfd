@@ -51,10 +51,10 @@ new FormModel {
 					"$columnSpecs": "default"
 					"$rowSpecs": "default, linegap, default, linegap, default"
 				} ) {
-					name: "panel1"
+					name: "deletePanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "deleteLab1"
-						"text": "Podaj krawedz"
+						"text": "Zaznacz krawedz"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 1
@@ -89,9 +89,9 @@ new FormModel {
 					"$columnSpecs": "default, labelcompgap, default"
 					"$rowSpecs": "default"
 				} ) {
-					name: "panel10"
+					name: "addEdgePanel"
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "JtextV1"
+						name: "startEdgeText"
 						"preferredSize": new java.awt.Dimension( 50, 26 )
 						"minimumSize": new java.awt.Dimension( 50, 26 )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -99,7 +99,7 @@ new FormModel {
 						"gridY": 1
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "JtextV2"
+						name: "endEdgeText"
 						"minimumSize": new java.awt.Dimension( 50, 26 )
 						"preferredSize": new java.awt.Dimension( 50, 26 )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -111,7 +111,7 @@ new FormModel {
 					"gridY": 7
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
+					name: "addEdge"
 					"text": "Dodaj"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -122,9 +122,9 @@ new FormModel {
 					"$columnSpecs": "default"
 					"$rowSpecs": "default, linegap, default, linegap, default"
 				} ) {
-					name: "panel11"
+					name: "algorithmsPanel"
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsLabel" ) {
-						name: "label5"
+						name: "selectAlgorithmLabel"
 						"textWithMnemonic": "text"
 						"text": "Wybierz algorytm"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -138,7 +138,7 @@ new FormModel {
 						"gridY": 3
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button4"
+						name: "algorithmButton"
 						"text": "Start"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
