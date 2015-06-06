@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.2.1.0.138" Java: "1.8.0_45" encoding: "UTF-8"
+JFDML JFormDesigner: "5.2.1.0.138" Java: "1.7.0_79" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -15,33 +15,35 @@ new FormModel {
 				name: "optionsPanel"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 					"$columnSpecs": "default"
-					"$rowSpecs": "default, linegap, default, linegap, default"
+					"$rowSpecs": "default, linegap, default, linegap, default, linegap, default"
 				} ) {
-					name: "panel8"
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsLabel" ) {
-						name: "numOfVertexLabel"
-						"textWithMnemonic": "text"
-						"text": "Liczba wierzcholkow"
+					name: "panel2"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "Liczba wierzchołków:"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 1
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "nrOfVertex"
+						name: "textField1"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 3
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "okButton"
-						"text": "Ok"
-						"preferredSize": new java.awt.Dimension( 30, 34 )
-						"minimumSize": new java.awt.Dimension( 30, 34 )
-						"maximumSize": new java.awt.Dimension( 30, 34 )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2ActionPerformed", true ) )
+						name: "button1"
+						"text": "Nowy graf"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 5
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button2"
+						"text": "Dodaj"
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 1
+						"gridY": 7
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
