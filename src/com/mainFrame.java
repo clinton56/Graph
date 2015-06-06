@@ -18,7 +18,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 /**
  * @author Mariusz Bielec
@@ -31,6 +32,7 @@ public class mainFrame extends JFrame {
     mxGraph graph;
     Object[] V;
     int nbOfVertex;
+    List<Object> listVertex;
 
     private void button3ActionPerformed(ActionEvent e) {
         int v1 = Integer.parseInt(JtextV1.getText());
@@ -67,6 +69,7 @@ public class mainFrame extends JFrame {
         circleLayout.execute(parent);
         graph.getModel().beginUpdate();
         V = new Object[100];
+        listVertex = new LinkedList<>();
 
         try {
             /*Object v1 = graph.insertVertex(parent, null, "Hello", 10, 20, 80,
@@ -85,7 +88,7 @@ public class mainFrame extends JFrame {
                     80, 80);*/
 
             for (int i = 0; i < n; i++) {
-                V[i] = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
+                listVertex.add(graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30));
             }
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
             //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
@@ -147,7 +150,7 @@ public class mainFrame extends JFrame {
                     80, 80);*/
 
             for (int i = nbOfVertex; i < nbOfVertex+n; i++) {
-                V[i] = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
+                listVertex.add(graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30));
             }
             nbOfVertex+=n;
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
@@ -178,8 +181,15 @@ public class mainFrame extends JFrame {
     }
 
     private void deleteButtonActionPerformed(ActionEvent e) {
+        for(Object o : listVertex) {
+            if(graph.getSelectionCell().equals(o)) {
+                System.out.println("wierzcholek");
+                listVertex.remove(graph.getSelectionCell());
+            }
+        }
         graph.removeCells(graph.getSelectionCells());
-        nbOfVertex--;
+        //graph.removeSelectionCell(graph.getSelectionCell());
+        listVertex.remove(graph.getSelectionCell());
     }
 
 
@@ -233,8 +243,8 @@ public class mainFrame extends JFrame {
             //======== panel2 ========
             {
                 panel2.setLayout(new FormLayout(
-                    "default",
-                    "3*(default, $lgap), default"));
+                        "default",
+                        "3*(default, $lgap), default"));
 
                 //---- vertexLabel ----
                 vertexLabel.setText("Liczba wierzcho\u0142k\u00f3w:");
@@ -243,6 +253,12 @@ public class mainFrame extends JFrame {
 
                 //---- newGraphButton ----
                 newGraphButton.setText("Nowy graf");
+                newGraphButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        newGraphButtonActionPerformed(e);
+                    }
+                });
                 panel2.add(newGraphButton, CC.xy(1, 5));
 
                 //---- addVertexButton ----
