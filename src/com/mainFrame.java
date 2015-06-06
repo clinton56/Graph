@@ -18,8 +18,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Mariusz Bielec
@@ -54,7 +55,7 @@ public class mainFrame extends JFrame {
 
     private void newGraphButtonActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(numberOfVertex.getText());
-        nbOfVertex=n;
+        nbOfVertex = n;
         graph = new mxGraph();
         Object parent = graph.getDefaultParent();
         Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
@@ -149,10 +150,10 @@ public class mainFrame extends JFrame {
             Object v7 = graph.insertVertex(parent, null, "World!", 10, 310,
                     80, 80);*/
 
-            for (int i = nbOfVertex; i < nbOfVertex+n; i++) {
+            for (int i = nbOfVertex; i < nbOfVertex + n; i++) {
                 listVertex.add(graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30));
             }
-            nbOfVertex+=n;
+            nbOfVertex += n;
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
             //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
 
@@ -181,18 +182,14 @@ public class mainFrame extends JFrame {
     }
 
     private void deleteButtonActionPerformed(ActionEvent e) {
-        for(Object o : listVertex) {
-            if(graph.getSelectionCell().equals(o)) {
-                System.out.println("wierzcholek");
-                listVertex.remove(graph.getSelectionCell());
-            }
+        if (listVertex.contains(graph.getSelectionCell())) {
+            System.out.println("wierzcholek");
+            listVertex.remove(graph.getSelectionCell());
         }
         graph.removeCells(graph.getSelectionCells());
         //graph.removeSelectionCell(graph.getSelectionCell());
-        listVertex.remove(graph.getSelectionCell());
+//        listVertex.remove(graph.getSelectionCell());
     }
-
-
 
 
     private void initComponents() {
@@ -223,22 +220,27 @@ public class mainFrame extends JFrame {
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(new FormLayout(
-            "4*(default, $lcgap), default",
-            "default"));
+                "4*(default, $lcgap), default",
+                "default"));
 
         //======== optionsPanel ========
         {
 
             // JFormDesigner evaluation mark
             optionsPanel.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), optionsPanel.getBorder())); optionsPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+                    new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                            "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                            javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                            java.awt.Color.red), optionsPanel.getBorder()));
+            optionsPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                public void propertyChange(java.beans.PropertyChangeEvent e) {
+                    if ("border".equals(e.getPropertyName())) throw new RuntimeException();
+                }
+            });
 
             optionsPanel.setLayout(new FormLayout(
-                "default",
-                "5*(default, $lgap), default"));
+                    "default",
+                    "5*(default, $lgap), default"));
 
             //======== panel2 ========
             {
@@ -276,8 +278,8 @@ public class mainFrame extends JFrame {
             //======== panel1 ========
             {
                 panel1.setLayout(new FormLayout(
-                    "default",
-                    "2*(default, $lgap), default"));
+                        "default",
+                        "2*(default, $lgap), default"));
 
                 //---- deleteLab1 ----
                 deleteLab1.setText("Podaj krawedz");
@@ -306,8 +308,8 @@ public class mainFrame extends JFrame {
             //======== panel10 ========
             {
                 panel10.setLayout(new FormLayout(
-                    "default, $lcgap, default",
-                    "default"));
+                        "default, $lcgap, default",
+                        "default"));
 
                 //---- JtextV1 ----
                 JtextV1.setPreferredSize(new Dimension(50, 26));
@@ -334,8 +336,8 @@ public class mainFrame extends JFrame {
             //======== panel11 ========
             {
                 panel11.setLayout(new FormLayout(
-                    "default",
-                    "2*(default, $lgap), default"));
+                        "default",
+                        "2*(default, $lgap), default"));
 
                 //---- label5 ----
                 label5.setText("Wybierz algorytm");
