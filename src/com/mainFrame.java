@@ -114,14 +114,15 @@ public class mainFrame extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Damian Liwak
+        // Generated using JFormDesigner Evaluation license - Mariusz Bielec
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
         optionsPanel = new JPanel();
-        panel8 = new JPanel();
-        numOfVertexLabel = compFactory.createLabel("text");
-        nrOfVertex = new JTextField();
-        okButton = new JButton();
-        deletePanel = new JPanel();
+        panel2 = new JPanel();
+        label1 = new JLabel();
+        textField1 = new JTextField();
+        button1 = new JButton();
+        button2 = new JButton();
+        panel1 = new JPanel();
         deleteLab1 = new JLabel();
         deleteLab2 = new JLabel();
         deleteButton = new JButton();
@@ -156,28 +157,28 @@ public class mainFrame extends JFrame {
                 "default",
                 "5*(default, $lgap), default"));
 
-            //======== panel8 ========
+            //======== panel2 ========
             {
-                panel8.setLayout(new FormLayout(
+                panel2.setLayout(new FormLayout(
                     "default",
-                    "2*(default, $lgap), default"));
+                    "3*(default, $lgap), default"));
 
-                //---- numOfVertexLabel ----
-                numOfVertexLabel.setText("Liczba wierzcholkow");
-                panel8.add(numOfVertexLabel, CC.xy(1, 1));
-                panel8.add(nrOfVertex, CC.xy(1, 3));
+                //---- label1 ----
+                label1.setText("Liczba wierzcho\u0142k\u00f3w:");
+                panel2.add(label1, CC.xy(1, 1));
+                panel2.add(textField1, CC.xy(1, 3));
 
-                //---- okButton ----
-                okButton.setText("Ok");
-                okButton.setPreferredSize(new Dimension(30, 34));
-                okButton.setMinimumSize(new Dimension(30, 34));
-                okButton.setMaximumSize(new Dimension(30, 34));
-                okButton.addActionListener(e -> button2ActionPerformed(e));
-                panel8.add(okButton, CC.xy(1, 5));
+                //---- button1 ----
+                button1.setText("Nowy graf");
+                panel2.add(button1, CC.xy(1, 5));
+
+                //---- button2 ----
+                button2.setText("Dodaj");
+                panel2.add(button2, CC.xy(1, 7));
             }
-            optionsPanel.add(panel8, CC.xy(1, 1));
+            optionsPanel.add(panel2, CC.xy(1, 1));
 
-            //======== deletePanel ========
+            //======== panel1 ========
             {
                 deletePanel.setLayout(new FormLayout(
                     "default",
