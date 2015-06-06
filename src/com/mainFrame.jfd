@@ -19,28 +19,31 @@ new FormModel {
 				} ) {
 					name: "panel2"
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label1"
+						name: "vertexLabel"
 						"text": "Liczba wierzchołków:"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 1
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField1"
+						name: "numberOfVertex"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 3
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
+						name: "newGraphButton"
 						"text": "Nowy graf"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "newGraphButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 5
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button2"
+						name: "addVertexButton"
 						"text": "Dodaj"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addVertexButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 7
@@ -53,10 +56,10 @@ new FormModel {
 					"$columnSpecs": "default"
 					"$rowSpecs": "default, linegap, default, linegap, default"
 				} ) {
-					name: "deletePanel"
+					name: "panel1"
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "deleteLab1"
-						"text": "Zaznacz krawedz"
+						"text": "Podaj krawedz"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 1
@@ -71,6 +74,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "deleteButton"
 						"text": "Usun"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 5
@@ -91,9 +95,9 @@ new FormModel {
 					"$columnSpecs": "default, labelcompgap, default"
 					"$rowSpecs": "default"
 				} ) {
-					name: "addEdgePanel"
+					name: "panel10"
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "startEdgeText"
+						name: "JtextV1"
 						"preferredSize": new java.awt.Dimension( 50, 26 )
 						"minimumSize": new java.awt.Dimension( 50, 26 )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -101,7 +105,7 @@ new FormModel {
 						"gridY": 1
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "endEdgeText"
+						name: "JtextV2"
 						"minimumSize": new java.awt.Dimension( 50, 26 )
 						"preferredSize": new java.awt.Dimension( 50, 26 )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -113,7 +117,7 @@ new FormModel {
 					"gridY": 7
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "addEdge"
+					name: "button3"
 					"text": "Dodaj"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -124,9 +128,9 @@ new FormModel {
 					"$columnSpecs": "default"
 					"$rowSpecs": "default, linegap, default, linegap, default"
 				} ) {
-					name: "algorithmsPanel"
+					name: "panel11"
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsLabel" ) {
-						name: "selectAlgorithmLabel"
+						name: "label5"
 						"textWithMnemonic": "text"
 						"text": "Wybierz algorytm"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -140,7 +144,7 @@ new FormModel {
 						"gridY": 3
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "algorithmButton"
+						name: "button4"
 						"text": "Start"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
