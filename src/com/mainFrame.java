@@ -32,7 +32,7 @@ public class mainFrame extends JFrame {
     Object[] V;
 
     private void button2ActionPerformed(ActionEvent e) {
-        int n = Integer.parseInt(nrOfVertex.getText());
+        int n = Integer.parseInt(textField1.getText());
         graph = new mxGraph();
         Object parent = graph.getDefaultParent();
         Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
