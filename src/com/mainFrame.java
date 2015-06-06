@@ -95,8 +95,8 @@ public class mainFrame extends JFrame {
     }
 
     private void button3ActionPerformed(ActionEvent e) {
-        int v1 = Integer.parseInt(JtextV1.getText());
-        int v2 = Integer.parseInt(JtextV2.getText());
+        int v1 = Integer.parseInt(startEdgeText.getText());
+        int v2 = Integer.parseInt(endEdgeText.getText());
         graph.insertEdge(graph.getDefaultParent(), null, "df", V[v1 - 1], V[v2 - 1]);
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphPanel.removeAll();
@@ -127,14 +127,14 @@ public class mainFrame extends JFrame {
         deleteLab2 = new JLabel();
         deleteButton = new JButton();
         edgeLabel = compFactory.createLabel("text");
-        panel10 = new JPanel();
-        JtextV1 = new JTextField();
-        JtextV2 = new JTextField();
-        button3 = new JButton();
-        panel11 = new JPanel();
-        label5 = compFactory.createLabel("text");
+        addEdgePanel = new JPanel();
+        startEdgeText = new JTextField();
+        endEdgeText = new JTextField();
+        addEdge = new JButton();
+        algorithmsPanel = new JPanel();
+        selectAlgorithmLabel = compFactory.createLabel("text");
         selectAlgorithm = new JComboBox();
-        button4 = new JButton();
+        algorithmButton = new JButton();
         graphPanel = new JPanel();
 
         //======== this ========
@@ -180,72 +180,67 @@ public class mainFrame extends JFrame {
 
             //======== panel1 ========
             {
-                panel1.setLayout(new FormLayout(
+                deletePanel.setLayout(new FormLayout(
                     "default",
                     "2*(default, $lgap), default"));
 
                 //---- deleteLab1 ----
-                deleteLab1.setText("Podaj krawedz");
-                panel1.add(deleteLab1, CC.xy(1, 1));
+                deleteLab1.setText("Zaznacz krawedz");
+                deletePanel.add(deleteLab1, CC.xy(1, 1));
 
                 //---- deleteLab2 ----
                 deleteLab2.setText("lub wierzcholek:");
-                panel1.add(deleteLab2, CC.xy(1, 3));
+                deletePanel.add(deleteLab2, CC.xy(1, 3));
 
                 //---- deleteButton ----
                 deleteButton.setText("Usun");
-                panel1.add(deleteButton, CC.xy(1, 5));
+                deletePanel.add(deleteButton, CC.xy(1, 5));
             }
-            optionsPanel.add(panel1, CC.xy(1, 3));
+            optionsPanel.add(deletePanel, CC.xy(1, 3));
 
             //---- edgeLabel ----
             edgeLabel.setText("Dodaj krawedz:");
             optionsPanel.add(edgeLabel, CC.xy(1, 5));
 
-            //======== panel10 ========
+            //======== addEdgePanel ========
             {
-                panel10.setLayout(new FormLayout(
+                addEdgePanel.setLayout(new FormLayout(
                     "default, $lcgap, default",
                     "default"));
 
-                //---- JtextV1 ----
-                JtextV1.setPreferredSize(new Dimension(50, 26));
-                JtextV1.setMinimumSize(new Dimension(50, 26));
-                panel10.add(JtextV1, CC.xy(1, 1));
+                //---- startEdgeText ----
+                startEdgeText.setPreferredSize(new Dimension(50, 26));
+                startEdgeText.setMinimumSize(new Dimension(50, 26));
+                addEdgePanel.add(startEdgeText, CC.xy(1, 1));
 
-                //---- JtextV2 ----
-                JtextV2.setMinimumSize(new Dimension(50, 26));
-                JtextV2.setPreferredSize(new Dimension(50, 26));
-                panel10.add(JtextV2, CC.xy(3, 1));
+                //---- endEdgeText ----
+                endEdgeText.setMinimumSize(new Dimension(50, 26));
+                endEdgeText.setPreferredSize(new Dimension(50, 26));
+                addEdgePanel.add(endEdgeText, CC.xy(3, 1));
             }
-            optionsPanel.add(panel10, CC.xy(1, 7));
+            optionsPanel.add(addEdgePanel, CC.xy(1, 7));
 
-            //---- button3 ----
-            button3.setText("Dodaj");
-            button3.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    button3ActionPerformed(e);
-                }
-            });
-            optionsPanel.add(button3, CC.xy(1, 9));
+            //---- addEdge ----
+            addEdge.setText("Dodaj");
+            addEdge.addActionListener(e -> button3ActionPerformed(e));
+            optionsPanel.add(addEdge, CC.xy(1, 9));
 
-            //======== panel11 ========
+            //======== algorithmsPanel ========
             {
-                panel11.setLayout(new FormLayout(
+                algorithmsPanel.setLayout(new FormLayout(
                     "default",
                     "2*(default, $lgap), default"));
 
-                //---- label5 ----
-                label5.setText("Wybierz algorytm");
-                panel11.add(label5, CC.xy(1, 1));
-                panel11.add(selectAlgorithm, CC.xy(1, 3));
+                //---- selectAlgorithmLabel ----
+                selectAlgorithmLabel.setText("Wybierz algorytm");
+                algorithmsPanel.add(selectAlgorithmLabel, CC.xy(1, 1));
+                algorithmsPanel.add(selectAlgorithm, CC.xy(1, 3));
 
-                //---- button4 ----
-                button4.setText("Start");
-                panel11.add(button4, CC.xy(1, 5));
+                //---- algorithmButton ----
+                algorithmButton.setText("Start");
+                algorithmsPanel.add(algorithmButton, CC.xy(1, 5));
             }
-            optionsPanel.add(panel11, CC.xy(1, 11));
+            optionsPanel.add(algorithmsPanel, CC.xy(1, 11));
         }
         contentPane.add(optionsPanel, CC.xy(1, 1, CC.DEFAULT, CC.TOP));
 
@@ -262,26 +257,25 @@ public class mainFrame extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mariusz Bielec
+    // Generated using JFormDesigner Evaluation license - Damian Liwak
     private JPanel optionsPanel;
-    private JPanel panel2;
-    private JLabel label1;
-    private JTextField textField1;
-    private JButton button1;
-    private JButton button2;
-    private JPanel panel1;
+    private JPanel panel8;
+    private JLabel numOfVertexLabel;
+    private JTextField nrOfVertex;
+    private JButton okButton;
+    private JPanel deletePanel;
     private JLabel deleteLab1;
     private JLabel deleteLab2;
     private JButton deleteButton;
     private JLabel edgeLabel;
-    private JPanel panel10;
-    private JTextField JtextV1;
-    private JTextField JtextV2;
-    private JButton button3;
-    private JPanel panel11;
-    private JLabel label5;
+    private JPanel addEdgePanel;
+    private JTextField startEdgeText;
+    private JTextField endEdgeText;
+    private JButton addEdge;
+    private JPanel algorithmsPanel;
+    private JLabel selectAlgorithmLabel;
     private JComboBox selectAlgorithm;
-    private JButton button4;
+    private JButton algorithmButton;
     private JPanel graphPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
