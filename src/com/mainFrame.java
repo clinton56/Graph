@@ -38,7 +38,7 @@ public class mainFrame extends JFrame {
     private void button3ActionPerformed(ActionEvent e) {
         int v1 = Integer.parseInt(JtextV1.getText());
         int v2 = Integer.parseInt(JtextV2.getText());
-        graph.insertEdge(graph.getDefaultParent(), null, "df", V[v1 - 1], V[v2 - 1]);
+        graph.insertEdge(graph.getDefaultParent(), null, "df", V[v1-1], V[v2-1]);
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphPanel.removeAll();
         graphPanel.add(graphComponent);
@@ -71,6 +71,7 @@ public class mainFrame extends JFrame {
         graph.getModel().beginUpdate();
         V = new Object[100];
         listVertex = new LinkedList<>();
+        V = new Object[300];
 
         try {
             /*Object v1 = graph.insertVertex(parent, null, "Hello", 10, 20, 80,
@@ -89,7 +90,9 @@ public class mainFrame extends JFrame {
                     80, 80);*/
 
             for (int i = 0; i < n; i++) {
-                listVertex.add(graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30));
+                Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
+                listVertex.add(v);
+                V[i]=v;
             }
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
             //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
@@ -151,7 +154,9 @@ public class mainFrame extends JFrame {
                     80, 80);*/
 
             for (int i = nbOfVertex; i < nbOfVertex + n; i++) {
-                listVertex.add(graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30));
+                Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
+                listVertex.add(v);
+                V[i]=v;
             }
             nbOfVertex += n;
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
@@ -191,6 +196,10 @@ public class mainFrame extends JFrame {
 //        listVertex.remove(graph.getSelectionCell());
     }
 
+    private void button1ActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -220,33 +229,28 @@ public class mainFrame extends JFrame {
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(new FormLayout(
-                "4*(default, $lcgap), default",
-                "default"));
+            "4*(default, $lcgap), default",
+            "default"));
 
         //======== optionsPanel ========
         {
 
             // JFormDesigner evaluation mark
             optionsPanel.setBorder(new javax.swing.border.CompoundBorder(
-                    new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                            "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                            javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                            java.awt.Color.red), optionsPanel.getBorder()));
-            optionsPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-                public void propertyChange(java.beans.PropertyChangeEvent e) {
-                    if ("border".equals(e.getPropertyName())) throw new RuntimeException();
-                }
-            });
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), optionsPanel.getBorder())); optionsPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             optionsPanel.setLayout(new FormLayout(
-                    "default",
-                    "5*(default, $lgap), default"));
+                "default",
+                "5*(default, $lgap), default"));
 
             //======== panel2 ========
             {
                 panel2.setLayout(new FormLayout(
-                        "default",
-                        "3*(default, $lgap), default"));
+                    "default",
+                    "3*(default, $lgap), default"));
 
                 //---- vertexLabel ----
                 vertexLabel.setText("Liczba wierzcho\u0142k\u00f3w:");
@@ -258,6 +262,7 @@ public class mainFrame extends JFrame {
                 newGraphButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        button1ActionPerformed(e);
                         newGraphButtonActionPerformed(e);
                     }
                 });
@@ -278,8 +283,8 @@ public class mainFrame extends JFrame {
             //======== panel1 ========
             {
                 panel1.setLayout(new FormLayout(
-                        "default",
-                        "2*(default, $lgap), default"));
+                    "default",
+                    "2*(default, $lgap), default"));
 
                 //---- deleteLab1 ----
                 deleteLab1.setText("Podaj krawedz");
@@ -308,8 +313,8 @@ public class mainFrame extends JFrame {
             //======== panel10 ========
             {
                 panel10.setLayout(new FormLayout(
-                        "default, $lcgap, default",
-                        "default"));
+                    "default, $lcgap, default",
+                    "default"));
 
                 //---- JtextV1 ----
                 JtextV1.setPreferredSize(new Dimension(50, 26));
@@ -329,6 +334,7 @@ public class mainFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     button3ActionPerformed(e);
+                    button3ActionPerformed(e);
                 }
             });
             optionsPanel.add(button3, CC.xy(1, 9));
@@ -336,8 +342,8 @@ public class mainFrame extends JFrame {
             //======== panel11 ========
             {
                 panel11.setLayout(new FormLayout(
-                        "default",
-                        "2*(default, $lgap), default"));
+                    "default",
+                    "2*(default, $lgap), default"));
 
                 //---- label5 ----
                 label5.setText("Wybierz algorytm");
