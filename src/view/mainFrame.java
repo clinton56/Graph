@@ -197,7 +197,7 @@ public class mainFrame extends JFrame {
                     "3*(default, $lgap), default"));
 
                 //---- vertexLabel ----
-                vertexLabel.setText("Liczba wierzcho\u0142k\u00f3w:");
+                vertexLabel.setText("Liczba wierzcholkow:");
                 panel2.add(vertexLabel, CC.xy(1, 1));
                 panel2.add(numberOfVertex, CC.xy(1, 3));
 
@@ -294,6 +294,8 @@ public class mainFrame extends JFrame {
                 panel11.add(label5, CC.xy(1, 1));
                 panel11.add(selectAlgorithm, CC.xy(1, 3));
                 selectAlgorithm.addItem("DFS");
+                selectAlgorithm.addItem("BFS");
+                selectAlgorithm.addItem("SCC");
 
 
                 //---- button4 ----
