@@ -2,13 +2,14 @@
  * Created by JFormDesigner on Tue May 19 02:08:43 CEST 2015
  */
 
-package view;
+package com;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.jgoodies.forms.layout.FormLayout;
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxFastOrganicLayout;
+import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
@@ -122,21 +123,13 @@ public class mainFrame extends JFrame {
     }
 
     private void deleteButtonActionPerformed(ActionEvent e) {
-        System.out.println("wchodzi");
         if (graph.listVertex.contains(graph.getSelectionCell())) {
             System.out.println("wierzcholek");
             graph.listVertex.remove(graph.getSelectionCell());
-        }
+        }System.out.println("wchodzi");
         graph.removeCells(graph.getSelectionCells());
-        graph.removeCells(graph.getSelectionCells());
-//        revalidate();
-//        repaint();
-//        graph.removeSelectionCell(graph.getSelectionCell());
+        //graph.removeSelectionCell(graph.getSelectionCell());
 //        listVertex.remove(graph.getSelectionCell());
-    }
-
-    private void button1ActionPerformed(ActionEvent e) {
-        // TODO add your code here
     }
 
     private void button4ActionPerformed(ActionEvent e) {
@@ -206,7 +199,6 @@ public class mainFrame extends JFrame {
                 newGraphButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        button1ActionPerformed(e);
                         newGraphButtonActionPerformed(e);
                     }
                 });
