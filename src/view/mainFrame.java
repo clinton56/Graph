@@ -285,6 +285,8 @@ public class mainFrame extends JFrame {
                 label5.setText("Wybierz algorytm");
                 panel11.add(label5, CC.xy(1, 1));
                 panel11.add(selectAlgorithm, CC.xy(1, 3));
+                selectAlgorithm.addItem("DFS");
+
 
                 //---- button4 ----
                 button4.setText("Start");
