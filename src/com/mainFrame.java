@@ -52,17 +52,22 @@ public class mainFrame extends JFrame {
 
     }
 
-
+    public void changeStyleSheet(){
+        Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
+        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+        st.put(mxConstants.STYLE_GRADIENTCOLOR, "green");
+        st.put(mxConstants.STYLE_FONTSIZE, "10");
+    }
+    public void changeVertexColor(Object o, String c){
+        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, c, new Object[]{o});
+    }
     private void newGraphButtonActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(numberOfVertex.getText());
         nbOfVertex = n;
         graph = new mxGraph();
         Object parent = graph.getDefaultParent();
-        Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
-        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
-        st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
-        st.put(mxConstants.STYLE_FONTSIZE, "10");
+        changeStyleSheet();
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
         layout.setForceConstant(80);
         mxCircleLayout circleLayout = new mxCircleLayout(graph);
@@ -74,36 +79,12 @@ public class mainFrame extends JFrame {
         V = new Object[300];
 
         try {
-            /*Object v1 = graph.insertVertex(parent, null, "Hello", 10, 20, 80,
-                    30);
-            Object v2 = graph.insertVertex(parent, null, "World!", 240, 250,
-                    80, 30);
-            Object v3 = graph.insertVertex(parent, null, "World!", 300, 50,
-                    80, 30);
-            Object v4 = graph.insertVertex(parent, null, "World!", 400, 180,
-                    80, 30);
-            Object v5 = graph.insertVertex(parent, null, "World!", 450, 10,
-                    80, 30);
-            Object v6 = graph.insertVertex(parent, null, "World!", 200, 100,
-                    80, 30);
-            Object v7 = graph.insertVertex(parent, null, "World!", 10, 310,
-                    80, 80);*/
 
             for (int i = 0; i < n; i++) {
                 Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
                 listVertex.add(v);
                 V[i]=v;
             }
-            //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
-            //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
-
-
-            /*graph.insertEdge(parent, null, "Edge", v1, v2);
-            graph.insertEdge(parent, null, "Edge", v1, v3);
-            graph.insertEdge(parent, null, "Edge", v2, v6);
-            graph.insertEdge(parent, null, "Edge", v6, v4);
-            graph.insertEdge(parent, null, "Edge", v5, v3);*/
-            // circleLayout.execute(parent);
             circleLayout.execute(parent);
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
         } finally {
@@ -124,11 +105,6 @@ public class mainFrame extends JFrame {
     private void addVertexButtonActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(numberOfVertex.getText());
         Object parent = graph.getDefaultParent();
-        Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
-        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
-        st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
-        st.put(mxConstants.STYLE_FONTSIZE, "10");
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
         layout.setForceConstant(80);
         mxCircleLayout circleLayout = new mxCircleLayout(graph);
@@ -138,20 +114,6 @@ public class mainFrame extends JFrame {
         //V = new Object[nbOfVertex];
 
         try {
-            /*Object v1 = graph.insertVertex(parent, null, "Hello", 10, 20, 80,
-                    30);
-            Object v2 = graph.insertVertex(parent, null, "World!", 240, 250,
-                    80, 30);
-            Object v3 = graph.insertVertex(parent, null, "World!", 300, 50,
-                    80, 30);
-            Object v4 = graph.insertVertex(parent, null, "World!", 400, 180,
-                    80, 30);
-            Object v5 = graph.insertVertex(parent, null, "World!", 450, 10,
-                    80, 30);
-            Object v6 = graph.insertVertex(parent, null, "World!", 200, 100,
-                    80, 30);
-            Object v7 = graph.insertVertex(parent, null, "World!", 10, 310,
-                    80, 80);*/
 
             for (int i = nbOfVertex; i < nbOfVertex + n; i++) {
                 Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
@@ -159,16 +121,6 @@ public class mainFrame extends JFrame {
                 V[i]=v;
             }
             nbOfVertex += n;
-            //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
-            //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
-
-
-            /*graph.insertEdge(parent, null, "Edge", v1, v2);
-            graph.insertEdge(parent, null, "Edge", v1, v3);
-            graph.insertEdge(parent, null, "Edge", v2, v6);
-            graph.insertEdge(parent, null, "Edge", v6, v4);
-            graph.insertEdge(parent, null, "Edge", v5, v3);*/
-            // circleLayout.execute(parent);
             circleLayout.execute(parent);
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
         } finally {
@@ -196,9 +148,6 @@ public class mainFrame extends JFrame {
 //        listVertex.remove(graph.getSelectionCell());
     }
 
-    private void button1ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
 
 
     private void initComponents() {
@@ -262,7 +211,6 @@ public class mainFrame extends JFrame {
                 newGraphButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        button1ActionPerformed(e);
                         newGraphButtonActionPerformed(e);
                     }
                 });
