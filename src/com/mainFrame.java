@@ -9,6 +9,7 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.jgoodies.forms.layout.FormLayout;
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxFastOrganicLayout;
+import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
@@ -29,16 +30,12 @@ public class mainFrame extends JFrame {
     public mainFrame() {
         initComponents();
     }
-
-    mxGraph graph;
-    Object[] V;
-    int nbOfVertex;
-    List<Object> listVertex;
+    Graph graph;
 
     private void button3ActionPerformed(ActionEvent e) {
         int v1 = Integer.parseInt(JtextV1.getText());
         int v2 = Integer.parseInt(JtextV2.getText());
-        graph.insertEdge(graph.getDefaultParent(), null, "df", V[v1-1], V[v2-1]);
+        graph.insertEdge(graph.getDefaultParent(), null, "df", graph.V[v1-1], graph.V[v2-1]);
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphPanel.removeAll();
         graphPanel.add(graphComponent);
@@ -52,38 +49,29 @@ public class mainFrame extends JFrame {
 
     }
 
-    public void changeStyleSheet(){
-        Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
-        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
-        st.put(mxConstants.STYLE_GRADIENTCOLOR, "green");
-        st.put(mxConstants.STYLE_FONTSIZE, "10");
-    }
-    public void changeVertexColor(Object o, String c){
-        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, c, new Object[]{o});
-    }
+
     private void newGraphButtonActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(numberOfVertex.getText());
-        nbOfVertex = n;
-        graph = new mxGraph();
+        graph.nbOfVertex = n;
+        graph = new Graph();
         Object parent = graph.getDefaultParent();
-        changeStyleSheet();
+        graph.changeStyleSheet();
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
         layout.setForceConstant(80);
         mxCircleLayout circleLayout = new mxCircleLayout(graph);
         //circleLayout.execute(parent);
         circleLayout.execute(parent);
         graph.getModel().beginUpdate();
-        V = new Object[100];
-        listVertex = new LinkedList<>();
-        V = new Object[300];
+        graph.V = new Object[100];
+        graph.listVertex = new LinkedList<>();
+        graph.V = new Object[300];
 
         try {
 
             for (int i = 0; i < n; i++) {
                 Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
-                listVertex.add(v);
-                V[i]=v;
+                graph.listVertex.add(v);
+                graph.V[i]=v;
             }
             circleLayout.execute(parent);
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
@@ -108,21 +96,17 @@ public class mainFrame extends JFrame {
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
         layout.setForceConstant(80);
         mxCircleLayout circleLayout = new mxCircleLayout(graph);
-        //circleLayout.execute(parent);
         circleLayout.execute(parent);
         graph.getModel().beginUpdate();
-        //V = new Object[nbOfVertex];
-
         try {
 
-            for (int i = nbOfVertex; i < nbOfVertex + n; i++) {
+            for (int i = graph.nbOfVertex; i < graph.nbOfVertex + n; i++) {
                 Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
-                listVertex.add(v);
-                V[i]=v;
+                graph.listVertex.add(v);
+                graph.V[i]=v;
             }
-            nbOfVertex += n;
+            graph.nbOfVertex += n;
             circleLayout.execute(parent);
-            //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
         } finally {
             graph.getModel().endUpdate();
         }
@@ -139,9 +123,9 @@ public class mainFrame extends JFrame {
     }
 
     private void deleteButtonActionPerformed(ActionEvent e) {
-        if (listVertex.contains(graph.getSelectionCell())) {
+        if (graph.listVertex.contains(graph.getSelectionCell())) {
             System.out.println("wierzcholek");
-            listVertex.remove(graph.getSelectionCell());
+            graph.listVertex.remove(graph.getSelectionCell());
         }
         graph.removeCells(graph.getSelectionCells());
         //graph.removeSelectionCell(graph.getSelectionCell());
@@ -341,4 +325,23 @@ public class mainFrame extends JFrame {
     private JButton button4;
     private JPanel graphPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+}
+
+
+class Graph extends mxGraph{
+    Object[] V;
+    public static int nbOfVertex;
+    List<Object> listVertex;
+
+    public void changeStyleSheet(){
+        Map<String, Object> st = super.getStylesheet().getDefaultVertexStyle();
+        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+        st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
+        st.put(mxConstants.STYLE_FONTSIZE, "10");
+    }
+    public void changeVertexColor(Object o, String c){
+        super.setCellStyles(mxConstants.STYLE_FILLCOLOR, c, new Object[]{o});
+        //((mxCell)o).
+    }
 }
