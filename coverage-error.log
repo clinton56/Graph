@@ -36,7 +36,7 @@ java.lang.NullPointerException
 	at javax.swing.JFrame.createRootPane(JFrame.java:271)
 	at javax.swing.JFrame.frameInit(JFrame.java:252)
 	at javax.swing.JFrame.<init>(JFrame.java:175)
-	at com.mainFrame.<init>(mainFrame.java:28)
+	at view.mainFrame.<init>(mainFrame.java:28)
 	at com.Graph$1.run(Graph.java:10)
 	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
 	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:745)

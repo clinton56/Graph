@@ -1,4 +1,6 @@
-package com;
+package controller;
+
+import view.mainFrame;
 
 import javax.swing.*;
 import java.awt.*;

@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Tue May 19 02:08:43 CEST 2015
  */
 
-package com;
+package view;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -29,24 +29,20 @@ public class mainFrame extends JFrame {
     public mainFrame() {
         initComponents();
     }
-
-    mxGraph graph;
-    Object[] V;
-    int nbOfVertex;
-    List<Object> listVertex;
+    Graph graph;
 
     private void button3ActionPerformed(ActionEvent e) {
         int v1 = Integer.parseInt(JtextV1.getText());
         int v2 = Integer.parseInt(JtextV2.getText());
-        graph.insertEdge(graph.getDefaultParent(), null, "df", V[v1-1], V[v2-1]);
+        graph.insertEdge(graph.getDefaultParent(), null, "df", graph.V[v1-1], graph.V[v2-1]);
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphPanel.removeAll();
         graphPanel.add(graphComponent);
-        graphPanel.setAutoscrolls(true);
-        graphPanel.setPreferredSize(graphComponent.getPreferredSize());
-        graphPanel.revalidate();
-        graphPanel.repaint();
-        pack();
+        //graphPanel.setAutoscrolls(true);
+        //graphPanel.setPreferredSize(graphComponent.getPreferredSize());
+        //graphPanel.revalidate();
+        //graphPanel.repaint();
+        //pack();
         revalidate();
         repaint();
 
@@ -55,55 +51,27 @@ public class mainFrame extends JFrame {
 
     private void newGraphButtonActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(numberOfVertex.getText());
-        nbOfVertex = n;
-        graph = new mxGraph();
+        graph.nbOfVertex = n;
+        graph = new Graph();
         Object parent = graph.getDefaultParent();
-        Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
-        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
-        st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
-        st.put(mxConstants.STYLE_FONTSIZE, "10");
+        graph.changeStyleSheet();
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
         layout.setForceConstant(80);
         mxCircleLayout circleLayout = new mxCircleLayout(graph);
         //circleLayout.execute(parent);
         circleLayout.execute(parent);
         graph.getModel().beginUpdate();
-        V = new Object[100];
-        listVertex = new LinkedList<>();
-        V = new Object[300];
+        graph.V = new Object[100];
+        graph.listVertex = new LinkedList<>();
+        graph.V = new Object[300];
 
         try {
-            /*Object v1 = graph.insertVertex(parent, null, "Hello", 10, 20, 80,
-                    30);
-            Object v2 = graph.insertVertex(parent, null, "World!", 240, 250,
-                    80, 30);
-            Object v3 = graph.insertVertex(parent, null, "World!", 300, 50,
-                    80, 30);
-            Object v4 = graph.insertVertex(parent, null, "World!", 400, 180,
-                    80, 30);
-            Object v5 = graph.insertVertex(parent, null, "World!", 450, 10,
-                    80, 30);
-            Object v6 = graph.insertVertex(parent, null, "World!", 200, 100,
-                    80, 30);
-            Object v7 = graph.insertVertex(parent, null, "World!", 10, 310,
-                    80, 80);*/
 
             for (int i = 0; i < n; i++) {
                 Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
-                listVertex.add(v);
-                V[i]=v;
+                graph.listVertex.add(v);
+                graph.V[i]=v;
             }
-            //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
-            //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
-
-
-            /*graph.insertEdge(parent, null, "Edge", v1, v2);
-            graph.insertEdge(parent, null, "Edge", v1, v3);
-            graph.insertEdge(parent, null, "Edge", v2, v6);
-            graph.insertEdge(parent, null, "Edge", v6, v4);
-            graph.insertEdge(parent, null, "Edge", v5, v3);*/
-            // circleLayout.execute(parent);
             circleLayout.execute(parent);
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
         } finally {
@@ -124,53 +92,20 @@ public class mainFrame extends JFrame {
     private void addVertexButtonActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(numberOfVertex.getText());
         Object parent = graph.getDefaultParent();
-        Map<String, Object> st = graph.getStylesheet().getDefaultVertexStyle();
-        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
-        st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
-        st.put(mxConstants.STYLE_FONTSIZE, "10");
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
         layout.setForceConstant(80);
         mxCircleLayout circleLayout = new mxCircleLayout(graph);
-        //circleLayout.execute(parent);
         circleLayout.execute(parent);
         graph.getModel().beginUpdate();
-        //V = new Object[nbOfVertex];
-
         try {
-            /*Object v1 = graph.insertVertex(parent, null, "Hello", 10, 20, 80,
-                    30);
-            Object v2 = graph.insertVertex(parent, null, "World!", 240, 250,
-                    80, 30);
-            Object v3 = graph.insertVertex(parent, null, "World!", 300, 50,
-                    80, 30);
-            Object v4 = graph.insertVertex(parent, null, "World!", 400, 180,
-                    80, 30);
-            Object v5 = graph.insertVertex(parent, null, "World!", 450, 10,
-                    80, 30);
-            Object v6 = graph.insertVertex(parent, null, "World!", 200, 100,
-                    80, 30);
-            Object v7 = graph.insertVertex(parent, null, "World!", 10, 310,
-                    80, 80);*/
 
-            for (int i = nbOfVertex; i < nbOfVertex + n; i++) {
+            for (int i = graph.nbOfVertex; i < graph.nbOfVertex + n; i++) {
                 Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
-                listVertex.add(v);
-                V[i]=v;
+                graph.listVertex.add(v);
+                graph.V[i]=v;
             }
-            nbOfVertex += n;
-            //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
-            //graph.setCellStyle(mxConstants.SHAPE_ELLIPSE, new Object[]{v4});
-
-
-            /*graph.insertEdge(parent, null, "Edge", v1, v2);
-            graph.insertEdge(parent, null, "Edge", v1, v3);
-            graph.insertEdge(parent, null, "Edge", v2, v6);
-            graph.insertEdge(parent, null, "Edge", v6, v4);
-            graph.insertEdge(parent, null, "Edge", v5, v3);*/
-            // circleLayout.execute(parent);
+            graph.nbOfVertex += n;
             circleLayout.execute(parent);
-            //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
         } finally {
             graph.getModel().endUpdate();
         }
@@ -187,18 +122,27 @@ public class mainFrame extends JFrame {
     }
 
     private void deleteButtonActionPerformed(ActionEvent e) {
-        if (listVertex.contains(graph.getSelectionCell())) {
+        System.out.println("wchodzi");
+        if (graph.listVertex.contains(graph.getSelectionCell())) {
             System.out.println("wierzcholek");
-            listVertex.remove(graph.getSelectionCell());
+            graph.listVertex.remove(graph.getSelectionCell());
         }
         graph.removeCells(graph.getSelectionCells());
-        //graph.removeSelectionCell(graph.getSelectionCell());
+        graph.removeCells(graph.getSelectionCells());
+//        revalidate();
+//        repaint();
+//        graph.removeSelectionCell(graph.getSelectionCell());
 //        listVertex.remove(graph.getSelectionCell());
     }
 
     private void button1ActionPerformed(ActionEvent e) {
         // TODO add your code here
     }
+
+    private void button4ActionPerformed(ActionEvent e) {
+       // graph.changeVertexColor(graph.V[2], "red");
+    }
+
 
 
     private void initComponents() {
@@ -352,6 +296,12 @@ public class mainFrame extends JFrame {
 
                 //---- button4 ----
                 button4.setText("Start");
+                button4.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        button4ActionPerformed(e);
+                    }
+                });
                 panel11.add(button4, CC.xy(1, 5));
             }
             optionsPanel.add(panel11, CC.xy(1, 11));
@@ -393,4 +343,23 @@ public class mainFrame extends JFrame {
     private JButton button4;
     private JPanel graphPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+}
+
+
+class Graph extends mxGraph{
+    Object[] V;
+    public static int nbOfVertex;
+    List<Object> listVertex;
+
+    public void changeStyleSheet(){
+        Map<String, Object> st = super.getStylesheet().getDefaultVertexStyle();
+        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+        st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
+        st.put(mxConstants.STYLE_FONTSIZE, "10");
+    }
+    public void changeVertexColor(Object o, String c){
+        super.setCellStyles(mxConstants.STYLE_FILLCOLOR, c, new Object[]{o});
+        //((mxCell)o).
+    }
 }
