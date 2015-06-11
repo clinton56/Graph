@@ -40,4 +40,10 @@ public class GraphModel {
         //  g.get(x).add(y);
         // g.get(y).add(x);
     }
+
+    void changeColorOfAllVertices(GraphView graphView) {
+        for (int i = 0; i < vertexObjects.length; i++) {
+            graphView.changeVertexColor(this.vertexObjects[i], "white");
+        }
+    }
 }

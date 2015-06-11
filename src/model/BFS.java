@@ -25,9 +25,11 @@ public class BFS {
         this.mf = mf;
         mf.repaint();
         gr = mf.getGraphics();
-        g.changeStyleSheet();
-        waiting();
+//        g.changeStyleSheet();
+//        waiting();
         graph = new GraphModel(g);
+        graph.changeColorOfAllVertices(g);
+        waiting();
         int start = findStarted(started, graph);
         queue = new ArrayList<Integer>();
         color = new int[graph.n + 2];
@@ -48,7 +50,7 @@ public class BFS {
             System.out.println("\nKolejka: " + queue + " current " + current);
             color[current] = 2;
             System.out.println("\nCzarny: " + current);
-            g.changeVertexColor(graph.vertexObjects[current], "red");
+            g.changeVertexColor(graph.vertexObjects[current], "cyan");
             waiting();
             for (int j = 0; j < graph.g.get(current).size(); j++) {
                 int k = graph.g.get(current).get(j);
