@@ -20,10 +20,8 @@ public class GraphModel {
         }
         vertexObjects = graph.V;
         boolean[][] graphMatrix = graph.neighbours;
-        System.out.println("Macierz kurwa chuj: \n");
         for (int i = 0; i < graphMatrix.length; i++) {
             for (int j = 0; j < graphMatrix[i].length; j++) {
-                System.out.print(graphMatrix[i][j] + "   ");
                 if (graphMatrix[i][j]) {
                     g.get(i).add(j);
                 }

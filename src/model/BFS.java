@@ -33,23 +33,19 @@ public class BFS {
         distance = new int[graph.n + 2];
         INF = graph.n + 100;
         queue.add(start);
-        System.out.println("Graf wyglada tak: " + graph.g + "\n\n\n");
         for (int i = 0; i < graph.n + 1; i++) {
             distance[i] = INF;
         }
 
         for (int i = 0; i < queue.size(); i++) {
             int current = queue.get(i);
-            System.out.println("\nKolejka: " + queue + " current " + current);
             color[current] = 2;
-            System.out.println("\nCzarny: " + current);
             g.changeVertexColor(graph.vertexObjects[current], "cyan");
             waiting();
             for (int j = 0; j < graph.g.get(current).size(); j++) {
                 int k = graph.g.get(current).get(j);
                 if (color[k] == 0) {
                     color[k] = 1;
-                    System.out.println("\nSzary: " + k);
                     g.changeVertexColor(graph.vertexObjects[k], "grey");
                     waiting();
                     distance[k] = distance[current] + 1;

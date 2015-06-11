@@ -16,7 +16,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Mariusz Bielec
@@ -66,12 +65,9 @@ public class mainFrame extends JFrame {
                 graph.V[i]=v;
             }
             int size = graph.listVertex.size();
+
             graph.neighbours = new boolean[size][size];
-            for(int i=0; i<size; i++){
-                for(int j=0; j<size; j++){
-                    graph.neighbours[i][j]=false;
-                }
-            }
+
             circleLayout.execute(parent);
         } finally {
             graph.getModel().endUpdate();
@@ -83,7 +79,6 @@ public class mainFrame extends JFrame {
         graphPanel.setPreferredSize(graphComponent.getPreferredSize());
         graphPanel.revalidate();
         graphPanel.repaint();
-        pack();
         revalidate();
         repaint();
     }
@@ -107,12 +102,19 @@ public class mainFrame extends JFrame {
             circleLayout.execute(parent);
 
             int size = graph.listVertex.size();
-            graph.neighbours = new boolean[size][size];
-            for(int i=0; i<size; i++){
-                for(int j=0; j<size; j++){
-                    graph.neighbours[i][j]=false;
+            boolean neighboursTmp[][] = new boolean[graph.neighbours.length][graph.neighbours.length];
+            for(int i = 0; i<graph.neighbours.length; i++){
+                for(int j=0; j<graph.neighbours.length;j++){
+                    neighboursTmp[i][j]=graph.neighbours[i][j];
                 }
             }
+            graph.neighbours = new boolean[size][size];
+            for(int i = 0; i<neighboursTmp.length; i++){
+                for(int j=0; j<neighboursTmp.length;j++){
+                    graph.neighbours[i][j]= neighboursTmp[i][j];
+                }
+            }
+
         } finally {
             graph.getModel().endUpdate();
         }
@@ -123,7 +125,6 @@ public class mainFrame extends JFrame {
         graphPanel.setPreferredSize(graphComponent.getPreferredSize());
         graphPanel.revalidate();
         graphPanel.repaint();
-        pack();
         revalidate();
         repaint();
     }
@@ -142,7 +143,6 @@ public class mainFrame extends JFrame {
     }
 
     private void button4ActionPerformed(ActionEvent e) {
-        System.out.println("wchodze");
         for(int i=0; i<graph.listVertex.size(); i++){
             for(int j=0; j<graph.listVertex.size(); j++){
                 if(graph.neighbours[i][j]==true){
@@ -150,7 +150,7 @@ public class mainFrame extends JFrame {
             }
         }
         if(graph.getSelectionCell()==null){
-            JOptionPane.showMessageDialog(null, "Zaznacz wierzcholek stratowy :-)",
+            JOptionPane.showMessageDialog(null, "Zaznacz wierzcholek startowy :-)",
                     "Uwaga", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -161,26 +161,7 @@ public class mainFrame extends JFrame {
         }
 
     }
-    public void dupa() {
-        for (int i = 0; i < graph.listVertex.size(); i++) {
-            Object o = graph.listVertex.get(i);
-            graph.changeVertexColor(o, "red");
-            mxGraphComponent graphComponent = new mxGraphComponent(graph);
-            System.out.println("jest tu po raz" + i);
-            Graphics g = this.getGraphics();
-            update(g);
-            revalidate();
-            repaint();
 
-            try {
-                TimeUnit.SECONDS.sleep(1);
-
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }
-            System.out.println("jest tu po raz" + i);
-        }
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -217,11 +198,6 @@ public class mainFrame extends JFrame {
         {
 
             // JFormDesigner evaluation mark
-            optionsPanel.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), optionsPanel.getBorder())); optionsPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             optionsPanel.setLayout(new FormLayout(
                 "default",
