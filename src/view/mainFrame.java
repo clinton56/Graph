@@ -20,6 +20,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,8 @@ public class mainFrame extends JFrame {
         int v1 = Integer.parseInt(JtextV1.getText());
         int v2 = Integer.parseInt(JtextV2.getText());
         graph.insertEdge(graph.getDefaultParent(), null, "df", graph.V[v1-1], graph.V[v2-1]);
+        graph.neighbours[v1-1][v2-1]=true;
+        graph.neighbours[v2-1][v1-1]=true;
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphPanel.removeAll();
         graphPanel.add(graphComponent);
@@ -45,6 +48,7 @@ public class mainFrame extends JFrame {
         //graphPanel.revalidate();
         //graphPanel.repaint();
         //pack();
+
         revalidate();
         repaint();
 
@@ -73,6 +77,13 @@ public class mainFrame extends JFrame {
                 Object v = graph.insertVertex(parent, null, "" + (i + 1), 0, 0, 30, 30);
                 graph.listVertex.add(v);
                 graph.V[i]=v;
+            }
+            int size = graph.listVertex.size();
+            graph.neighbours = new boolean[size][size];
+            for(int i=0; i<size; i++){
+                for(int j=0; j<size; j++){
+                    graph.neighbours[i][j]=false;
+                }
             }
             circleLayout.execute(parent);
             //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
@@ -108,6 +119,14 @@ public class mainFrame extends JFrame {
             }
             graph.nbOfVertex += n;
             circleLayout.execute(parent);
+
+            int size = graph.listVertex.size();
+            graph.neighbours = new boolean[size][size];
+            for(int i=0; i<size; i++){
+                for(int j=0; j<size; j++){
+                    graph.neighbours[i][j]=false;
+                }
+            }
         } finally {
             graph.getModel().endUpdate();
         }
@@ -134,10 +153,16 @@ public class mainFrame extends JFrame {
     }
 
     private void button4ActionPerformed(ActionEvent e) {
+        System.out.println("wchodze");
        // graph.changeVertexColor(graph.V[2], "red");
+        for(int i=0; i<graph.listVertex.size(); i++){
+            for(int j=0; j<graph.listVertex.size(); j++){
+                if(graph.neighbours[i][j]==true){
+                    System.out.println("krawedz z" + (i+1) + "do" + (j+1));
+                }
+            }
+        }
     }
-
-
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -191,7 +216,7 @@ public class mainFrame extends JFrame {
                     "3*(default, $lgap), default"));
 
                 //---- vertexLabel ----
-                vertexLabel.setText("Liczba wierzcholkow:");
+                vertexLabel.setText("Liczba wierzcho\u0142k\u00f3w:");
                 panel2.add(vertexLabel, CC.xy(1, 1));
                 panel2.add(numberOfVertex, CC.xy(1, 3));
 
@@ -279,17 +304,13 @@ public class mainFrame extends JFrame {
             //======== panel11 ========
             {
                 panel11.setLayout(new FormLayout(
-                    "default",
-                    "2*(default, $lgap), default"));
+                        "default",
+                        "2*(default, $lgap), default"));
 
                 //---- label5 ----
                 label5.setText("Wybierz algorytm");
                 panel11.add(label5, CC.xy(1, 1));
                 panel11.add(selectAlgorithm, CC.xy(1, 3));
-                selectAlgorithm.addItem("DFS");
-                selectAlgorithm.addItem("BFS");
-                selectAlgorithm.addItem("SCC");
-
 
                 //---- button4 ----
                 button4.setText("Start");
