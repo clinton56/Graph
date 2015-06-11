@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 public class GraphView extends mxGraph {
-    Object[] V;
+    public Object[] V;
     public static int nbOfVertex;
     public List<Object> listVertex;
     public boolean[][] neighbours;
