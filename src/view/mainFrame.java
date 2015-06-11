@@ -144,9 +144,14 @@ public class mainFrame extends JFrame {
 
     private void deleteButtonActionPerformed(ActionEvent e) {
         if (graph.listVertex.contains(graph.getSelectionCell())) {
-            System.out.println("wierzcholek");
             graph.listVertex.remove(graph.getSelectionCell());
-        }System.out.println("wchodzi");
+            for(int i=0; i<graph.V.length; i++){
+                if(graph.V[i]!=null && graph.V[i].equals(graph.getSelectionCell())) {
+                    graph.V[i]=null;
+                    break;
+                }
+            }
+        }
         graph.removeCells(graph.getSelectionCells());
         //graph.removeSelectionCell(graph.getSelectionCell());
 //        listVertex.remove(graph.getSelectionCell());
