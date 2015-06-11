@@ -14,6 +14,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxPerimeter;
+import model.BFS;
 
 
 import javax.swing.*;
@@ -164,7 +165,7 @@ public class mainFrame extends JFrame {
         for(int i=0; i<graph.listVertex.size(); i++){
             for(int j=0; j<graph.listVertex.size(); j++){
                 if(graph.neighbours[i][j]==true){
-                    System.out.println("krawedz z" + (i+1) + "do" + (j+1));
+             //       System.out.println("krawedz z" + (i+1) + "do" + (j+1));
                 }
             }
         }
@@ -175,7 +176,7 @@ public class mainFrame extends JFrame {
             //"Company name can not be empty");
             return;
         }
-        dupa();
+        model.BFS b = new model.BFS(graph.getSelectionCell(), graph,this);
     }
     public void dupa() {
         for (int i = 0; i < graph.listVertex.size(); i++) {

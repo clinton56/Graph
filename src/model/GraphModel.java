@@ -13,7 +13,7 @@ public class GraphModel {
     ArrayList<ArrayList<Integer>> g;
     Object[] vertexObjects;
 
-    GraphModel(GraphView graph) {
+    public GraphModel(GraphView graph) {
         //System.out.println("Wprowadz ilosc wierzcholkow");
         n = graph.listVertex.size();
         g = new ArrayList<ArrayList<Integer>>();
@@ -23,13 +23,15 @@ public class GraphModel {
         //m = graph.getAllEdges().length
         vertexObjects = graph.V;
         boolean[][] graphMatrix = graph.neighbours;
+        System.out.println("Macierz kurwa chuj: \n");
         for (int i = 0; i < graphMatrix.length; i++) {
             for (int j = 0; j < graphMatrix[i].length; j++) {
+                System.out.print(graphMatrix[i][j] + "   ");
                 if (graphMatrix[i][j]) {
                     g.get(i).add(j);
-                    g.get(j).add(i);
                 }
             }
+            System.out.print("\n");
         }
         //     for (int i = 0; i < m)
         //   int x = reader.nextInt();
