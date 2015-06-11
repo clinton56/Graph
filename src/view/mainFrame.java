@@ -167,6 +167,13 @@ public class mainFrame extends JFrame {
                 }
             }
         }
+        if(graph.getSelectionCell()==null){
+            JOptionPane.showMessageDialog(null, "Zaznacz wierzcholek stratowy :-)",
+                    "Uwaga", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null,
+            //"Company name can not be empty");
+            return;
+        }
     }
 
     private void initComponents() {
@@ -314,9 +321,12 @@ public class mainFrame extends JFrame {
 
                 //---- label5 ----
                 label5.setText("Wybierz algorytm");
+
                 panel11.add(label5, CC.xy(1, 1));
                 panel11.add(selectAlgorithm, CC.xy(1, 3));
-
+                selectAlgorithm.addItem("DFS");
+                selectAlgorithm.addItem("BFS");
+                selectAlgorithm.addItem("SCC");
                 //---- button4 ----
                 button4.setText("Start");
                 button4.addActionListener(new ActionListener() {
