@@ -1,6 +1,5 @@
 package view;
 
-import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxPerimeter;
@@ -24,12 +23,9 @@ public class GraphView extends mxGraph {
         st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
         st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
         st.put(mxConstants.STYLE_FONTSIZE, "10");
-       //((mxCell)o).get
-        //this.getgetChild ce
     }
     public void changeVertexColor(Object o, String c){
 
         super.setCellStyles(mxConstants.STYLE_FILLCOLOR, c, new Object[]{o});
-        //((mxCell)o).
     }
 }

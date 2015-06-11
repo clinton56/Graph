@@ -10,6 +10,7 @@ public class GraphApplication {
         EventQueue.invokeLater(new Runnable() {
             public void run(){
                 mainFrame f = new mainFrame();
+                f.setTitle("Graph Application ver. 0.9 Beta");
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(true);
             }

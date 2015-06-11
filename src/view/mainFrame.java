@@ -9,22 +9,13 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.jgoodies.forms.layout.FormLayout;
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxFastOrganicLayout;
-import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxConstants;
-import com.mxgraph.view.mxGraph;
-import com.mxgraph.view.mxPerimeter;
-import model.BFS;
-
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,11 +36,6 @@ public class mainFrame extends JFrame {
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphPanel.removeAll();
         graphPanel.add(graphComponent);
-        //graphPanel.setAutoscrolls(true);
-        //graphPanel.setPreferredSize(graphComponent.getPreferredSize());
-        //graphPanel.revalidate();
-        //graphPanel.repaint();
-        //pack();
 
         revalidate();
         repaint();
@@ -66,7 +52,6 @@ public class mainFrame extends JFrame {
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
         layout.setForceConstant(80);
         mxCircleLayout circleLayout = new mxCircleLayout(graph);
-        //circleLayout.execute(parent);
         circleLayout.execute(parent);
         graph.getModel().beginUpdate();
         graph.V = new Object[100];
@@ -88,7 +73,6 @@ public class mainFrame extends JFrame {
                 }
             }
             circleLayout.execute(parent);
-            //graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#10C500", new Object[]{v1, v2});
         } finally {
             graph.getModel().endUpdate();
         }
@@ -155,28 +139,27 @@ public class mainFrame extends JFrame {
             }
         }
         graph.removeCells(graph.getSelectionCells());
-        //graph.removeSelectionCell(graph.getSelectionCell());
-//        listVertex.remove(graph.getSelectionCell());
     }
 
     private void button4ActionPerformed(ActionEvent e) {
         System.out.println("wchodze");
-       // graph.changeVertexColor(graph.V[2], "red");
         for(int i=0; i<graph.listVertex.size(); i++){
             for(int j=0; j<graph.listVertex.size(); j++){
                 if(graph.neighbours[i][j]==true){
-             //       System.out.println("krawedz z" + (i+1) + "do" + (j+1));
                 }
             }
         }
         if(graph.getSelectionCell()==null){
             JOptionPane.showMessageDialog(null, "Zaznacz wierzcholek stratowy :-)",
                     "Uwaga", JOptionPane.INFORMATION_MESSAGE);
-            //JOptionPane.showMessageDialog(null,
-            //"Company name can not be empty");
             return;
         }
-        model.BFS b = new model.BFS(graph.getSelectionCell(), graph,this);
+        if("BFS".equals(selectAlgorithm.getSelectedItem())) {
+            model.BFS b = new model.BFS(graph.getSelectionCell(), graph,this);
+        } else if("DFS".equals(selectAlgorithm.getSelectedItem())) {
+            model.DFS b = new model.DFS(graph.getSelectionCell(), graph,this);
+        }
+
     }
     public void dupa() {
         for (int i = 0; i < graph.listVertex.size(); i++) {
