@@ -12,9 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class BFS {
     GraphModel graph;
     ArrayList<Integer> queue;
-    // kolor - 0 - bialy, 1 - szary, 2 - czarny
     int color[];
-    // tablica poprzednikow
     int previous[];
     final int INF;
     int distance[];
@@ -25,8 +23,6 @@ public class BFS {
         this.mf = mf;
         mf.repaint();
         gr = mf.getGraphics();
-//        g.changeStyleSheet();
-//        waiting();
         graph = new GraphModel(g);
         graph.changeColorOfAllVertices(g);
         waiting();
@@ -41,10 +37,7 @@ public class BFS {
         for (int i = 0; i < graph.n + 1; i++) {
             distance[i] = INF;
         }
-       // System.out.println("   Czarny: " + start);
 
-       // g.changeVertexColor(graph.vertexObjects[start], "red");
-        //waiting();
         for (int i = 0; i < queue.size(); i++) {
             int current = queue.get(i);
             System.out.println("\nKolejka: " + queue + " current " + current);

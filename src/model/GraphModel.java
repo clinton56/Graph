@@ -1,6 +1,5 @@
 package model;
 
-import com.mxgraph.model.mxCell;
 import view.GraphView;
 
 import java.util.ArrayList;
@@ -14,13 +13,11 @@ public class GraphModel {
     Object[] vertexObjects;
 
     public GraphModel(GraphView graph) {
-        //System.out.println("Wprowadz ilosc wierzcholkow");
         n = graph.listVertex.size();
         g = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i <= n + 2; i++) {
             g.add(new ArrayList<Integer>());
         }
-        //m = graph.getAllEdges().length
         vertexObjects = graph.V;
         boolean[][] graphMatrix = graph.neighbours;
         System.out.println("Macierz kurwa chuj: \n");
@@ -33,12 +30,6 @@ public class GraphModel {
             }
             System.out.print("\n");
         }
-        //     for (int i = 0; i < m)
-        //   int x = reader.nextInt();
-        //   int y = reader.nextInt();
-        //  // graf nieskierowany
-        //  g.get(x).add(y);
-        // g.get(y).add(x);
     }
 
     void changeColorOfAllVertices(GraphView graphView) {
