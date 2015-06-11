@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Mariusz Bielec
@@ -169,10 +170,31 @@ public class mainFrame extends JFrame {
         }
         if(graph.getSelectionCell()==null){
             JOptionPane.showMessageDialog(null, "Zaznacz wierzcholek stratowy :-)",
-                    "Uwaga", JOptionPane.ERROR_MESSAGE);
+                    "Uwaga", JOptionPane.INFORMATION_MESSAGE);
             //JOptionPane.showMessageDialog(null,
             //"Company name can not be empty");
             return;
+        }
+        dupa();
+    }
+    public void dupa() {
+        for (int i = 0; i < graph.listVertex.size(); i++) {
+            Object o = graph.listVertex.get(i);
+            graph.changeVertexColor(o, "red");
+            mxGraphComponent graphComponent = new mxGraphComponent(graph);
+            System.out.println("jest tu po raz" + i);
+            Graphics g = this.getGraphics();
+            update(g);
+            revalidate();
+            repaint();
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            System.out.println("jest tu po raz" + i);
         }
     }
 
