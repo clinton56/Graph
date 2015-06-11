@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Tue May 19 02:08:43 CEST 2015
  */
 
-package com;
+package view;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -14,6 +14,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxPerimeter;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +31,7 @@ public class mainFrame extends JFrame {
     public mainFrame() {
         initComponents();
     }
-    Graph graph;
+    GraphView graph;
 
     private void button3ActionPerformed(ActionEvent e) {
         int v1 = Integer.parseInt(JtextV1.getText());
@@ -53,7 +54,7 @@ public class mainFrame extends JFrame {
     private void newGraphButtonActionPerformed(ActionEvent e) {
         int n = Integer.parseInt(numberOfVertex.getText());
         graph.nbOfVertex = n;
-        graph = new Graph();
+        graph = new GraphView();
         Object parent = graph.getDefaultParent();
         graph.changeStyleSheet();
         mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
@@ -342,20 +343,3 @@ public class mainFrame extends JFrame {
 }
 
 
-class Graph extends mxGraph{
-    Object[] V;
-    public static int nbOfVertex;
-    List<Object> listVertex;
-
-    public void changeStyleSheet(){
-        Map<String, Object> st = super.getStylesheet().getDefaultVertexStyle();
-        st.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-        st.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
-        st.put(mxConstants.STYLE_GRADIENTCOLOR, "white");
-        st.put(mxConstants.STYLE_FONTSIZE, "10");
-    }
-    public void changeVertexColor(Object o, String c){
-        super.setCellStyles(mxConstants.STYLE_FILLCOLOR, c, new Object[]{o});
-        //((mxCell)o).
-    }
-}
